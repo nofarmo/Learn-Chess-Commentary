@@ -1,1 +1,1 @@
-# TAU-NLP-Learn-Chess-Commentary
+# Learn-Chess-Commentary
