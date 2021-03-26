@@ -1,5 +1,9 @@
 from Configs.train_config import config
+from tqdm import tqdm
+import torch
 
+
+# dataset
 
 dataset_tokens = list(config['data_to_use'].keys()) + ['<comment>']
 
@@ -54,3 +58,27 @@ def get_chess_tokens():
     chess_vocab = board_notation + moves + check_moves + ["O-O"]
 
     return chess_vocab
+
+
+# evaluation
+
+def get_targets_and_outputs(gpt2, dataset, comment_encoding, pad_token_id):
+    target_texts = []
+    output_texts = []
+    with tqdm(total=len(dataset)) as pbar:
+        for idx, entry in enumerate(dataset):
+
+          textual_data = gpt2.tokenizer.decode(token_ids=entry[0], skip_special_tokens=False)
+          textual_data = textual_data.split('<comment>')[1].split('<|endoftext|>')[0]
+          target_texts.append(textual_data)
+
+          comment_idx = list(entry[0]).index(comment_encoding) + 1
+          input_encoding = entry[0][:comment_idx].unsqueeze(0).cuda()
+          with torch.no_grad():
+              outputs = gpt2.model.generate(input_encoding, num_beams=2, no_repeat_ngram_size=2, max_length=769, pad_token_id=pad_token_id)
+              output_text = gpt2.tokenizer.decode(outputs[0], skip_special_tokens=False)
+              output_text = output_text.split('<comment>')[1].split('<|endoftext|>')[0]
+          output_texts.append(output_text)
+
+          pbar.update(1)
+    return target_texts, output_texts
