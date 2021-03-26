@@ -1,7 +1,7 @@
 from Configs.train_config import config
 
 
-dataset_tokens = list(config.data_to_use.keys()) + ['<comment>']
+dataset_tokens = list(config['data_to_use'].keys()) + ['<comment>']
 
 
 def convert_data_to_text(data_object, max_length=768, end_of_text_token="<|endoftext|>"):
@@ -14,7 +14,7 @@ def convert_data_to_text(data_object, max_length=768, end_of_text_token="<|endof
                      '<legal moves>': legal_moves, '<attacked by>': attackers_list, '<attacks>': attacks_list}
     text = ""
     for token in token_to_data.keys():
-        if config.data_to_use[token]:
+        if config['data_to_use'][token]:
             text += f"{token} {token_to_data[token]} "
     text += f"<comment> {comment} {end_of_text_token}"  # comment always included at the end + end token
 
