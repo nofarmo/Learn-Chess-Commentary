@@ -1,6 +1,6 @@
 from transformers import GPT2LMHeadModel, GPT2Config, GPT2Tokenizer
 from Utils import get_chess_tokens, dataset_tokens
-
+import torch
 
 GPT2_TYPE = "gpt2"
 
@@ -18,7 +18,11 @@ class GPT2:
         self.tokenizer.add_tokens(get_chess_tokens())
 
         # model
-        configuration = GPT2Config.from_pretrained(GPT2_TYPE)
-        self.model = GPT2LMHeadModel.from_pretrained(GPT2_TYPE, config=configuration).cuda()
+        self.configuration = GPT2Config.from_pretrained(GPT2_TYPE)
+        self.model = GPT2LMHeadModel.from_pretrained(GPT2_TYPE, config=self.configuration).cuda()
 
         self.model.resize_token_embeddings(len(self.tokenizer))
+
+    def load_model(self, model_path):
+        self.model = GPT2LMHeadModel(self.configuration)
+        self.model.load_state_dict(torch.load(model_path))
