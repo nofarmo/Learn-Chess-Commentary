@@ -44,7 +44,7 @@ if run_in_colab:
 else:
   BASE_PATH = '/home/joberant/nlp_fall_2021/nofarm/chess/'
 
-games_data_path = BASE_PATH + 'Data/NEW_fix/games_data'
+games_data_path = BASE_PATH + 'Data/NEW_attack/games_data'
 saved_models_path = BASE_PATH + 'Models/'
 
 """# GPT2
