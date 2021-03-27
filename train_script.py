@@ -87,7 +87,7 @@ for i in range(config['batch_size']):
   wandb.log({f"validation_input_text {i}": wandb.Html(f'<p>{validation_input_text}</p>')})
 
   comment_idx = list(validation_proccessed_data[i]).index(dataset.comment_encoding) + 1
-  validation_input_encoding = validation_proccessed_data[0][:comment_idx].unsqueeze(0).cuda()
+  validation_input_encoding = validation_proccessed_data[i][:comment_idx].unsqueeze(0).cuda()
   #validation_input_encoding  = gpt2.tokenizer.encode(validation_input_text, return_tensors="pt").cuda()
   
   validation_input_encodings.append(validation_input_encoding)
