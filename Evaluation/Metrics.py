@@ -22,7 +22,7 @@ def perplexity(model, dataloader):
     return perplexity
 
 
-def bleurt(output_texts, target_texts):
+def bleurt(target_texts, output_texts):
     metric = load_metric("bleurt")
     tf.compat.v1.flags.DEFINE_string('f', '', '')
 
@@ -30,7 +30,7 @@ def bleurt(output_texts, target_texts):
     return scores
 
 
-def bleu(output_texts, target_texts):
+def bleu(target_texts, output_texts):
     scores = []
     for idx in range(len(output_texts)):
         reference = [target_texts[idx].split()]
