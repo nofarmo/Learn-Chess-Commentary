@@ -7,7 +7,7 @@ import pickle
 class MovesDataset(Dataset):
     def __init__(self, paths, tokenizer, max_length=768):
 
-        self.comment_encoding = tokenizer('<comment>')['input_ids'][0]
+        self.comment_encoding = tokenizer.get_added_vocab()['<comment>']
 
         self.proccessed_data = []
         self.attn_masks = []
