@@ -1,4 +1,5 @@
 config = {
+    'Model': 'gpt2',
     'NUMER_OF_DATA_DIRS': 12,
     'batch_size': 2,
     'lr':  3e-5,
