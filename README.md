@@ -15,7 +15,7 @@ It was collected from the online chess website www.gameknot.com, and with addion
 
 ## Checkpoints
 
-Our pretrained checkpoint (for GPT2 and BERT-BASE) attached at this Drive folder[Drive folder](https://drive.google.com/drive/folders/17_I9gUQNY_QP4hBNikPI0klUH5chS-ML?usp=sharing)
+Our pretrained checkpoint (for GPT2 and BERT-BASE) attached at this [Drive folder](https://drive.google.com/drive/folders/17_I9gUQNY_QP4hBNikPI0klUH5chS-ML?usp=sharing)
 
 ## Inference
 
